@@ -1,0 +1,100 @@
+@font-face {
+  font-family: "Rubik";
+  src: url("/fonts/Rubik-Regular.woff2") format("woff2"),
+    url("/fonts/Rubik-Regular.ttf") format("truetype");
+  font-style: normal;
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: "Rubik";
+  src: url("../public/fonts/Rubik-Medium.woff2") format("woff2"),
+    url("/fonts/Rubik-Medium.ttf") format("truetype");
+  font-style: normal;
+  font-weight: 500;
+}
+
+@font-face {
+  font-family: "Rubik";
+  src: url("/fonts/Rubik-Bold.woff2") format("woff2"),
+    url("/fonts/Rubik-Bold.ttf") format("truetype");
+  font-style: normal;
+  font-weight: 700;
+}
+
+:root {
+  --moderate-blue: hsl(238, 40%, 52%);
+  --soft-red: hsl(358, 79%, 66%);
+  --light-grayish: hsl(239, 57%, 85%);
+  --pale-red: hsl(357, 100%, 86%);
+
+  --dark-blue: hsl(212, 24%, 26%);
+  --grayish-blue: hsl(211, 10%, 45%);
+  --light-gray: hsl(223, 19%, 93%);
+  --very-light-gray: hsl(228, 33%, 97%);
+  --white: hsl(0, 0%, 100%);
+
+  --404-red: hsl(358.3, 66.8%, 57.5%);
+
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: light dark;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  min-height: 100vh;
+  background-color: var(--very-light-gray);
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* HEADINGS STYLES */
+
+h1 {
+  font-size: clamp(2.244rem, 1.768vw + 1.930rem, 3.815rem);
+}
+
+h2 {
+  font-size: clamp(1.908rem, 1.288vw + 1.679rem, 3.052rem);
+}
+
+h3 {
+  font-size: clamp(1.628rem, 0.916vw + 1.465rem, 2.442rem);
+}
+
+h4 {
+  font-size: clamp(1.395rem, 0.628vw + 1.283rem, 1.953rem);
+}
+
+h5 {
+  font-size: clamp(1.202rem, 0.406vw + 1.130rem, 1.563rem);
+}
+
+h6 {
+  font-size: clamp(1.042rem, 0.234vw + 1.000rem, 1.250rem);
+}
+
+body {
+  font-size: clamp(0.909rem, 0.102vw + 0.891rem, 1.000rem);
+}
+
+small {
+  font-size: clamp(0.727rem, 0.082vw + 0.713rem, 0.800rem);
+}

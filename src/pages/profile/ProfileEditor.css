@@ -1,0 +1,78 @@
+.form {
+  --form-gap: clamp(1rem, 1rem + 3vw, 1.5rem);
+
+  padding: 2rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: var(--form-gap);
+}
+
+.form__group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form__group label {
+  font-size: var(--fs-small);
+}
+
+.form__group input {
+  margin-top: .3rem;
+}
+
+.form__group input,
+.form__group textarea {
+  min-width: 100%;
+}
+
+.form__group--avatar {
+  flex-direction: column;
+  gap: .5rem;
+}
+
+.form__avatar-container {
+  border: 2px solid var(--moderate-blue);
+  border-radius: 50%;
+  width: 125px;
+  height: 125px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  cursor: pointer;
+
+  /* TODO - Add hover/focus styles */
+  /*@media (hover: hover) {}*/
+}
+
+.form__avatar {
+  padding: .5rem;
+}
+
+.form__avatar-input {
+  display: none;
+}
+
+.form__avatar-text {
+  font-size: var(--fs-small);
+  color: var(--grayish-blue);
+}
+
+.form__group--bio textarea {
+  resize: none;
+}
+
+.form__group--private {
+  display: flex;
+  align-items: start;
+  gap: 1rem;
+}
+
+.form__private-text {
+  font-size: var(--fs-small);
+  color: var(--grayish-blue);
+}
+
+.form__save-btn {
+  align-self: center;
+}

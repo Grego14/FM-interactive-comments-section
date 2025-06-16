@@ -1,0 +1,88 @@
+.form-post {
+  --input-bg: linear-gradient(90deg, var(--moderate-blue), var(--dark-blue));
+  --fs-no-verified-text: clamp(1rem, 1rem + .8vw, 1.35rem);
+  --form-width: clamp(16rem, 16rem + 12vmin, 25rem);
+
+  padding: 1.5rem;
+  margin: auto;
+  margin-block: 1rem 2rem;
+  width: var(--form-width);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  border: 1px solid var(--light-grayish);
+  border-radius: .5rem;
+  box-shadow: 0 0 5px var(--light-grayish);
+}
+
+.form-post__inputs {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.form-post__label {
+  display: flex;
+  flex-direction: column;
+  gap: .3rem;
+}
+
+.form-post__input {
+  min-height: 2rem;
+  background-image: var(--input-bg);
+  color: var(--white);
+  border: 1px solid transparent;
+}
+
+.form-post__input:disabled {
+  cursor: not-allowed;
+  filter: opacity(0.5) saturate(0.5);
+}
+
+.form-post__input--tags {
+  max-width: fit-content;
+}
+
+.form-post__input__textarea {
+  resize: none;
+}
+
+.post__tags__preview {
+  display: flex;
+  gap: .8rem;
+  margin-block: .8rem;
+}
+
+.post__tags__max {
+  display: block;
+  font-size: .75rem;
+  margin-top: .5rem;
+}
+
+.form-post__error {
+  color: var(--error-fg);
+}
+
+.form__post-preview {
+  min-height: 12rem;
+}
+
+.post-preview {
+  text-wrap: wrap;
+  padding: .8rem .5rem;
+  border-radius: .3rem;
+  background-color: var(--light-grayish);
+}
+
+.form-post__buttons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+
+@media (hover: hover) {
+  .form-post__input:hover {
+    border-color: var(--light-grayish);
+  }
+}

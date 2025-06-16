@@ -1,0 +1,40 @@
+.notification {
+  min-width: 100%;
+}
+
+.notification__container {
+  padding: .5rem;
+  border-radius: .3rem;
+}
+
+.notification--new .notification__container {
+  background-color: var(--very-light-gray);
+}
+
+.notification__title {
+  color: var(--moderate-blue);
+  font-weight: bold;
+  font-size: .95rem;
+  margin-bottom: .2rem;
+}
+
+.notification__content {
+  font-size: .8rem;
+  text-wrap: wrap;
+  line-break: anywhere;
+}
+
+.notification__line {
+  margin-top: .8rem;
+  border-bottom: 1px solid var(--very-light-gray);
+}
+
+.notification__special-text {
+  font-weight: bold;
+  color: var(--dark-blue);
+  font-size: .85rem;
+}
+
+.notification__special-text--post {
+  font-size: .9rem;
+}

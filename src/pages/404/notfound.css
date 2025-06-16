@@ -1,0 +1,19 @@
+.notfound {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 2.5rem;
+}
+
+.notfound__title {
+  display: flex;
+  flex-direction: column;
+  max-width: 50rem;
+}
+
+.notfound__number {
+  color: var(--404-red);
+  font-size: 3.5rem;
+  line-height: 1;
+}

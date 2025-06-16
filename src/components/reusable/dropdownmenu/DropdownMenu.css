@@ -1,0 +1,22 @@
+.menu {
+  position: relative;
+  height: 50px;
+  width: 50px;
+}
+
+.menu__items {
+  list-style-type: none;
+  position: absolute;
+  min-width: 8rem;
+  top: 50px;
+  right: 0;
+  display: inline-block;
+  background-color: var(--grayish-blue);
+  text-align: right;
+}
+
+.menu__items[aria-hidden='true'] {
+  width: 0;
+  height: 0;
+  visibility: collapse;
+}

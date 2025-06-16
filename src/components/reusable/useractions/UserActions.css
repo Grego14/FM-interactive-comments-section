@@ -1,0 +1,85 @@
+.user-actions {
+  --user-action-size: 40px;
+  --user-actions-box-border: #4d6b8c;
+  --user-actions-box-shadow: #39377d;
+  --user-actions-bg: #1c2835;
+
+  grid-row: 3;
+  padding: .75rem;
+  background-color: var(--user-actions-bg);
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.user-actions__box {
+  align-items: center;
+  justify-content: space-between;
+  display: flex;
+  min-width: 100%;
+  border: 1px solid var(--user-actions-box-border);
+  box-shadow: 0 0 8px var(--user-actions-box-shadow);
+  border-radius: .5rem;
+  padding: .4rem .6rem;
+}
+
+.user-actions__box>* {
+  border-radius: 50%;
+  border: 1px solid var(--user-actions-box-border);
+}
+
+.user-action>* {
+  width: var(--user-action-size);
+  height: var(--user-action-size);
+}
+
+/* NEW POST BUTTON START */
+
+.new-post-btn {
+  cursor: pointer;
+  background-color: var(--moderate-blue);
+  color: white;
+  border-radius: 50%;
+  min-width: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+}
+
+/* NEW POST BUTTON END */
+
+/* PROFILE BUTTON START */
+
+.profile-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.profile-button__avatar {
+  border-radius: 50%;
+  transition: filter .2s ease-in-out;
+}
+
+.profile-button__avatar:hover {
+  filter: saturate(1.2);
+}
+
+/* light mode 
+* TODO - Change this to invert(0) when the dark-mode works...
+* */
+.new-post-icon {
+  filter: invert();
+}
+
+/* PROFILE BUTTON END */
+
+@media only screen and (min-width: 30rem) {
+  .user-actions {
+    --user-action-size: 35px;
+
+    box-shadow: 0 0 10px var(--moderate-blue);
+  }
+}
