@@ -43,9 +43,6 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   const [_, offlineDebounce] = useDebounce(
     (snap: DataSnapshot) => {
-      setIsOffline(!snap.val());
-
-      // if this is true mean the user is offline...
       setIsOffline(!snap.val())
       console.log('Connection state -> ', snap.val() ? 'online' : 'offline')
     },
