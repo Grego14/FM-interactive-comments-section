@@ -47,8 +47,15 @@ const translations = {
         password: 'Password:'
       },
 
-      signUp: {
-        title: 'Create new account',
+      or: 'or',
+
+      githubButton: 'Continuar con GitHub',
+      googleButton: 'Continuar con Google',
+
+      signup: {
+        title: ['Join us', 'Create an ICS account'],
+        text: 'Start sharing your thoughts and ideas!',
+        authButton: 'Create account!',
         createAccount: 'Start! 👉',
         accountExists: 'That account already exists!',
         errors: {
@@ -60,15 +67,16 @@ const translations = {
           atSigns: 'Email can only have one @',
           shortTLD: 'Top level domain must be at least 2 characters long',
           shortPassword: 'Password must be at least 8 characters long!'
-        }
+        },
+        accountText: 'Already have an account?',
       },
       login: {
-        title: 'Log in',
-        noAccount: 'No account?',
-        btnEmail: 'Log in with email',
-        btnGoogle: 'Continue with Google',
-        btnGithub: 'Continue with Github',
-        recuperate: 'I forget my password'
+        title: ['Welcome back!', 'Login to your account'],
+        text: ['Start sharing your thoughts and ideas', 'again!'],
+        remember: 'Remember me',
+        recoverPassword: 'Forgot password?',
+        authButton: 'Log In',
+        accountText: "Don't have an account?",
       }
     },
     verifyEmailBanner: {
@@ -95,9 +103,10 @@ const translations = {
       edit: 'Editar',
       retry: 'Retry',
       logout: 'Log Out',
-      login: 'Log In'
+      login: 'Log In',
+      signup: 'Sign Up'
     },
-    signUpButton: 'Create a new account!'
+    signupButton: 'Create a new account!'
   },
   es: {
     profile: {
@@ -147,10 +156,16 @@ const translations = {
         password: 'Contraseña:'
       },
 
-      signUp: {
-        title: 'Crear nueva cuenta',
+      or: 'o',
+
+      githubButton: 'Continuar con GitHub',
+      googleButton: 'Continuar con Google',
+
+      signup: {
+        title: ['Unetenos', 'Crea una cuenta en ICS'],
+        text: 'Comienza a compartir tus pensamientos e ideas',
+        authButton: 'Crear cuenta!',
         createAccount: '¡Comenzar! 👉',
-        accountExists: '¡Esa cuenta ya existe!',
         errors: {
           emptyFields: 'Los campos no pueden estar vacios',
           emptyEmail: 'Se requiere un correo eléctronico',
@@ -160,16 +175,17 @@ const translations = {
           atSigns: 'El correo eléctronico debe contener solo un signo arroba',
           shortTLD: 'El dominio de alto nivel debe contener al menos 2 caracteres',
           shortPassword: 'La contraseña debe contener al menos 8 caracteres'
-        }
+        },
+        accountText: '¿Ya tienes cuenta?'
       },
 
       login: {
-        title: 'Inicia sesión',
-        noAccount: '¿No tienes cuenta?',
-        btnEmail: 'Iniciar sesión con email',
-        btnGoogle: 'Continuar con Google',
-        btnGithub: 'Continuar con Github',
-        recuperate: 'Olvide mi contraseña'
+        title: ['Bienvenido de vuelta', 'Inicia sesión a tu cuenta'],
+        text: ['Comienza a compartir tus pensamientos e ideas', 'de nuevo!'],
+        remember: 'Guardar sesión',
+        recoverPassword: 'Olvide mi contraseña',
+        authButton: 'Iniciar sesión',
+        accountText: '¿No tienes cuenta?',
       }
     },
     verifyEmailBanner: {
@@ -197,9 +213,10 @@ const translations = {
       edit: 'Editar',
       retry: 'Reintentar',
       logout: 'Cerrar sesión',
-      login: 'Iniciar sesión'
+      login: 'Iniciar sesión',
+      signup: 'Crear cuenta'
     },
-    signUpButton: '¡Crear una nueva cuenta!'
+    signupButton: '¡Crear una nueva cuenta!'
   }
 } as const
 

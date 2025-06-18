@@ -1,14 +1,11 @@
 import { useAuth } from './firebase/context/AuthContext'
-import { useMemo, lazy, useEffect, useContext } from 'react'
+import { useMemo, lazy, useEffect } from 'react'
 import { Route, Routes } from 'react-router-dom'
 
 import ProtectedRoute from './components/reusable/auth/ProtectedRute'
 import Home from './pages/home/Home'
-import { AppContext } from './App'
 
 const NotFound = lazy(() => import('./pages/404/NotFound'))
-const LogIn = lazy(() => import('./pages/auth/LogIn'))
-const SignUp = lazy(() => import('./pages/auth/SignUp'))
 const NewPost = lazy(() => import('./pages/newpost/NewPost'))
 const Profile = lazy(() => import('./pages/profile/Profile'))
 const ProfileEditor = lazy(() => import('./pages/profile/ProfileEditor'))
@@ -17,9 +14,10 @@ const RestrictedRoute = lazy(
 )
 const PostPreview = lazy(() => import('./pages/posts/PostPreview'))
 
+const Auth = lazy(() => import('./pages/auth/Auth'))
+
 export default function AppRoutes() {
-  const { currentUser } = useAuth()
-  const { superUser } = useContext(AppContext)
+  const { currentUser, superUser } = useAuth()
   const restrictedPaths = useMemo(() => ['/login', '/signup'], [])
 
   useEffect(() => {
@@ -42,9 +40,9 @@ export default function AppRoutes() {
             isAuthenticated={Boolean(currentUser)}
             restrictedPaths={restrictedPaths}
           />
-        }>
-        <Route path='/login' element={<LogIn />} />
-        <Route path='/signup' element={<SignUp />} />
+          }>
+        <Route path='/login' element={<Auth type='login' />} />
+        <Route path='/signup' element={<Auth type='signup' />} />
       </Route>
       {/* <-----------------------------------------------------> */}
 
