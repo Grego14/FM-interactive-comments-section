@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useState, useReducer } from "react"
 import useTranslations from "../../hooks/useTranslations"
 import { Link, useNavigate } from "react-router-dom"
 import { Button } from "@mui/material"
@@ -10,19 +10,63 @@ interface AuthProps {
   type: 'login' | 'signup';
 }
 
+interface FormDataFields {
+  username: {
+    value: string,
+    error: string
+  }
+  email: {
+    value: string,
+    error: string
+  }
+  password: {
+    value: string,
+    error: string
+  }
+}
+
+const formDataInitialValue: FormDataFields = {
+  username: {
+    value: '',
+    error: ''
+  },
+  email: {
+    value: '',
+    error: ''
+  },
+  password: {
+    value: '',
+    error: ''
+  },
+}
+
+function formDataReducer(state, action){
+  const funcs = {
+    setError,
+    setValue
+  }
+
+  // Sets an error to the specified field
+  function setError({field, error}: {field: keyof FormDataFields, error: string}) {
+    return {...state, [field]: {value: state[field.value], error}}
+  }
+
+  function setValue({field, error}: {field: keyof FormDataFields, error: string}) {
+    return {...state, [field]: {value: state[field.value], error}}
+  }
+
+  return funcs[action.type]() || state
+}
+
 export default function Auth({ type = 'login' }: AuthProps){
   const navigate = useNavigate()
 
   const t = useTranslations()
   const typeTranslations = t.auth[type]
 
-  const { 
-    remember: rememberTranslation, 
-    recoverPassword: recoverPasswordTranslation 
-  } = t.auth.login
+  const [formData, dispatch] = useReducer(formDataReducer, formDataInitialValue)
 
   // TODO - Implement use of useReducer to save all this states in one object
-  const [username, setUsername] = useState('')
   const [usernameError, setUsernameError] = useState('')
 
   const [email, setEmail] = useState('')
