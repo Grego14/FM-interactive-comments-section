@@ -1,4 +1,4 @@
-import { useRef, useState, useCallback } from 'react'
+import { useRef, useState, useCallback, useMemo } from 'react'
 
 export default function useDebounce<T>(
   fn: (params: T) => void,
@@ -20,5 +20,5 @@ export default function useDebounce<T>(
     [fn, delay]
   )
 
-  return [debouncing, debounce]
+  return useMemo(() => [debouncing, debounce], [debouncing, debounce])
 }

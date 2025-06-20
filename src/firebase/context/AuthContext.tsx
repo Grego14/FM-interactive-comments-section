@@ -49,6 +49,10 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     2000
   )
 
+  useEffect(() => {
+    console.log(offlineDebounce)
+  }, [offlineDebounce])
+
   // Listen for connection changes
   useEffect(() => {
     const rtdb = getDatabase()

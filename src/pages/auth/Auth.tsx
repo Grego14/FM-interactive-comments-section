@@ -1,61 +1,22 @@
-import { useState, useReducer } from "react"
+import { useState, useReducer, useRef, useEffect, useActionState } from "react"
 import useTranslations from "../../hooks/useTranslations"
 import { Link, useNavigate } from "react-router-dom"
 import { Button } from "@mui/material"
 import IconButton from "../../components/reusable/buttons/IconButton"
 import GithubIcon from '@mui/icons-material/GitHub'
 import GoogleIcon from '@mui/icons-material/Google'
+import formDataReducer, {formDataInitialValue, type FormState} from './authFormReducer'
+import { signIn } from '../../firebase/auth.ts'
+import { useForm } from 'react-hook-form'
 
 interface AuthProps {
   type: 'login' | 'signup';
 }
 
-interface FormDataFields {
-  username: {
-    value: string,
-    error: string
-  }
-  email: {
-    value: string,
-    error: string
-  }
-  password: {
-    value: string,
-    error: string
-  }
-}
-
-const formDataInitialValue: FormDataFields = {
-  username: {
-    value: '',
-    error: ''
-  },
-  email: {
-    value: '',
-    error: ''
-  },
-  password: {
-    value: '',
-    error: ''
-  },
-}
-
-function formDataReducer(state, action){
-  const funcs = {
-    setError,
-    setValue
-  }
-
-  // Sets an error to the specified field
-  function setError({field, error}: {field: keyof FormDataFields, error: string}) {
-    return {...state, [field]: {value: state[field.value], error}}
-  }
-
-  function setValue({field, error}: {field: keyof FormDataFields, error: string}) {
-    return {...state, [field]: {value: state[field.value], error}}
-  }
-
-  return funcs[action.type]() || state
+type FormData = {
+  username?: string,
+  email: string,
+  password: string
 }
 
 export default function Auth({ type = 'login' }: AuthProps){
@@ -64,27 +25,49 @@ export default function Auth({ type = 'login' }: AuthProps){
   const t = useTranslations()
   const typeTranslations = t.auth[type]
 
+  const {register, handleSubmit, formState: {errors}} = useForm<FormData>()
+
   const [formData, dispatch] = useReducer(formDataReducer, formDataInitialValue)
-
-  // TODO - Implement use of useReducer to save all this states in one object
-  const [usernameError, setUsernameError] = useState('')
-
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-
-  const [emailError, setEmailError] = useState('')
-  const [passwordError, setPasswordError] = useState('')
-
-  const [loading, setLoading] = useState(false)
-  // ------------------------------------------------------------------------
+  const usernameErrorRef = useRef(null)
+  const emailErrorRef = useRef(null)
+  const passwordErrorRef = useRef(null)
 
   const isSignup = type === 'signup'
-  const formIsInvalid = Boolean(usernameError || emailError || passwordError)
+  const formIsInvalid = Object.values(formData).some(data => data.error)
 
-  // TODO - Focus the error span element when there's an 
-  // error in one of the inputs.
+  const [state, checkFieldsAndLogIn, isPending] = useActionState(async (e) => {
+    const submitHandled = e
+    console.log(submitHandled)
 
-  return (<form className='auth' noValidate>
+    if(!isSignup) {
+      // ... set the username
+      return
+    }
+
+    //const logIn = await signIn(formData.email.value, formData.password.value)
+
+    //if(logIn) console.log('User logged', logIn)
+  }, formData)
+
+  useEffect(() => {
+    const refs = {
+      username: usernameErrorRef,
+      email: emailErrorRef,
+      password: passwordErrorRef
+    }
+
+    if(formIsInvalid){
+      // Iterate over all error fields. Stop on the first that has an error.
+      // Focus the one that has an error. (we need the field name to do this).
+      for (const [key, value] of Object.entries(formData)) {
+        console.log(key, value)
+      }
+    }
+  }, [formData, formIsInvalid])
+
+  const onSubmit = handleSubmit((data) => console.log(data))
+
+  return (<form className='auth' noValidate onSubmit={onSubmit} action={handleSubmit}>
     <h2 className='auth__title-first'>{typeTranslations.title[0]}</h2>
     <h2 className='auth__title-last'>{typeTranslations.title[1]}</h2>
 
@@ -101,25 +84,38 @@ export default function Auth({ type = 'login' }: AuthProps){
 
       {isSignup && (
         <div className='auth__field__group'>
-          <input type="text" name='username' required placeholder='Username'/>
-          {usernameError && <span aria-live="assertive">{usernameError}</span>}
+          <input 
+            type="text" 
+            placeholder='Username' 
+            {...register('username')} 
+            aria-invalid={errors.username ? 'true' : 'false'} />
+          {errors.username && <span aria-live="assertive">{errors.username.message}</span>}
         </div>
       )}
 
       <div className='auth__field__group'>
-        <input type="text" name='email' required placeholder='Email'/>
-        {emailError && <span aria-live="assertive">{emailError}</span>}
+        <input 
+          type="text" 
+          placeholder='Email' 
+          {...register('email', {required: true})} 
+          aria-invalid={errors.email ? 'true' : 'false'} />
+        {errors.email && <span aria-live="assertive">{errors.email.message}</span>}
       </div>
 
       <div className='auth__field__group'>
-        <input type="password" name='password' required placeholder='Password'/>
-        {passwordError && <span aria-live="assertive">{passwordError}</span>}
+        <input 
+          type="password" 
+          required 
+          placeholder='Password' 
+          {...register('password', {required: true, minLength: 6})} 
+          aria-invalid={errors.password ? 'true' : 'false'}/>
+        {errors.password && <span aria-live="assertive">{errors.password.message}</span>}
       </div>
 
       {!isSignup && (
       <div className='auth__fields__actions'>
         <div className='auth__field__group'>
-          <input type='checkbox' checked name='remember-me' />
+          <input type='checkbox' defaultChecked name='remember-me'/>
           <label htmlFor='remember-me'>{t.auth.login.remember}</label>
         </div>
 
@@ -129,7 +125,7 @@ export default function Auth({ type = 'login' }: AuthProps){
     </div>
 
     <div className='auth__buttons'>
-      <Button type='submit' disabled={loading || formIsInvalid}>{typeTranslations.authButton}</Button>
+      <Button type='submit' disabled={isPending}>{typeTranslations.authButton}</Button>
 
       <div>{t.auth.or}</div>
 
